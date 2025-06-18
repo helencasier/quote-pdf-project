@@ -1,0 +1,5 @@
+cat u
+sf auth web login --instance-url https://test.salesforce.com --alias sandbox2
+sf auth web login --instance-url https://test.salesforce.com --alias sandbox2
+
+

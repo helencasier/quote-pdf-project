@@ -1,0 +1,16 @@
+ 1072  which npm\nnpm --version\n
+ 1073  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"\n
+ 1074  brew install node\n
+ 1075  node -v\nnpm -v\n
+ 1076  npm uninstall -g @salesforce/cli\n
+ 1077  npm install -g @salesforce/cli\n
+ 1078  sf --version\nsf plugins list\n
+ 1079  sf --version\n
+ 1080  sf plugins\n
+ 1081  sf deploy source \\n  --target-org sandbox2 \\n  --source-path force-app/main/default/classes \\n  --test-level RunSpecifiedTests \\n  --tests QuoteControllerTest\n
+ 1082  sf plugins list --verbose\n
+ 1083  sf plugins list --verbose
+ 1084  sf plugins list --verbose\n
+ 1085  npm uninstall -g @salesforce/cli\n
+ 1086  rm -rf /usr/local/lib/sfdx /usr/local/bin/sfdx /usr/local/bin/sf ~/.local/share/sfdx ~/.config/sfdx ~/.cache/sfdx\n
+ 1087  sudo rm -rf /usr/local/lib/sfdx /usr/local/bin/sfdx /usr/local/bin/sf ~/.local/share/sfdx ~/.config/sfdx ~/.cache/sfdx\n

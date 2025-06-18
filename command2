@@ -1,0 +1,16 @@
+ 1012  sf apex run test --class-names QuoteControllerTest_Deployable --target-org helensbox2\n --synchronous
+ 1013  sf apex get test -i 01pEi00000BFrdb -o helenx@resilio.com.helensbox2
+ 1014  sf apex get test -i 70701pEi00000BFrdb -o helenx@resilio.com.helensbox2
+ 1015  sf apex get test -i 707Ei000013KQfp -o helenx@resilio.com.helensbox2
+ 1016  sf project deploy start --metadata ApexClass:QuoteControllerTest_Deployable --target-org helensbox2\n
+ 1017  sf apex run test --class-names QuoteControllerTest_Deployable --target-org helensbox2 --asyncronous\n --synchronous
+ 1018  sf apex run test --class-names QuoteControllerTest_Deployable --target-org helensbox2 --asynchronous\n
+ 1019  sf apex run test --class-names QuoteControllerTest_Deployable --target-org helensbox2 --synchronous\n
+ 1020  sf project deploy start --metadata ApexClass:QuoteControllerTest_Deployable --target-org helensbox2\n
+ 1021  sf apex run test --class-names QuoteControllerTest_Deployable --target-org helensbox2 --synchronous\n
+ 1022  sf project deploy start --metadata ApexClass:QuoteControllerTest_Deployable --target-org helensbox2\n
+ 1023  sf apex run test --class-names QuoteControllerTest_Deployable --target-org helensbox2 --synchronous\n
+ 1024  sf project deploy start --metadata ApexClass:QuoteControllerTest_Deployable --target-org helensbox2\n
+ 1025  sf apex run test --class-names QuoteControllerTest_Deployable --target-org helensbox2\n
+ 1026  sf apex get test -i 707Ei000013KMsW -o helenx@resilio.com.helensbox2
+ 1027  sf org login web --alias devbox\nsf org login web --alias sandbox1\nsf org login web --alias prod\n
