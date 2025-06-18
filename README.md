@@ -1,3 +1,58 @@
+# quote-pdf-project
+
+This repository contains the source code for the Salesforce Quote PDF generation project.
+
+## Project Overview
+
+The project includes:
+- Apex controller `QuoteController`
+- Visualforce page `QuotePDFTemplate`
+- Supporting metadata like custom objects and test classes
+
+## Development Flow
+
+### Work Environment
+You develop in your **Dev Sandbox**, then deploy changes to **Sandbox 1 (SB1)** for staging verification, and finally deploy to **Production**.
+
+## Git & GitHub Setup
+
+To initialize your local project with Git and connect it to GitHub:
+
+### 1. Initialize Git (if not already initialized)
+```bash
+git init
+```
+
+### 2. Add and commit files
+```bash
+git add .
+git commit -m "Initial commit"
+```
+
+### 3. Create a GitHub repo from terminal
+```bash
+gh repo create quote-pdf-project --public --source=. --remote=origin --push
+```
+
+If you see an error like: `Unable to add remote "origin"` – it means the remote already exists.
+
+### 4. Fix the remote origin (if needed)
+```bash
+git remote set-url origin https://github.com/helencasier/quote-pdf-project.git
+```
+
+### 5. Verify the remote
+```bash
+git remote -v
+```
+
+### 6. Push to GitHub
+```bash
+git push -u origin main
+```
+
+
+
 # Salesforce DX Project: Next Steps
 
 Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
