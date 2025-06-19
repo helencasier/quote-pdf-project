@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <environments>Default</environments>
+    <formulas>
+        <name>Domain</name>
+        <dataType>String</dataType>
+        <expression>RIGHT({!$Record.Contact.Email}, LEN({!$Record.Contact.Email}) - FIND(&quot;@&quot;, {!$Record.Contact.Email}))</expression>
+    </formulas>
+    <interviewLabel>Update Opp Domain Based on Contact Roles {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Update Opp Domain Based on Contact Roles</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Copy_1_of_Update_Opp_Domain</name>
+        <label>Copy 1 of Update Opp Domain</label>
+        <locationX>314</locationX>
+        <locationY>288</locationY>
+        <inputAssignments>
+            <field>domain__c</field>
+            <value>
+                <elementReference>Domain</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Opportunity</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Opp_Domain</name>
+        <label>Update Opp Domain</label>
+        <locationX>50</locationX>
+        <locationY>288</locationY>
+        <inputAssignments>
+            <field>domain__c</field>
+            <value>
+                <elementReference>Domain</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Opportunity</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_Opp_Domain</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Role</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Technical Buyer</stringValue>
+            </value>
+        </filters>
+        <object>OpportunityContactRole</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>Set_Domain_After_5_Min</name>
+            <connector>
+                <targetReference>Copy_1_of_Update_Opp_Domain</targetReference>
+            </connector>
+            <label>Set Domain After 5 Min</label>
+            <offsetNumber>5</offsetNumber>
+            <offsetUnit>Minutes</offsetUnit>
+            <timeSource>RecordTriggerEvent</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

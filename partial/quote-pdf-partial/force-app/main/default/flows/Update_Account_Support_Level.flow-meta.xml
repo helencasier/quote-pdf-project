@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <assignments>
+        <name>Default_to_Eval</name>
+        <label>Default to Eval</label>
+        <locationX>182</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>CurrentSupportLevel</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Eval</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Read_Opps</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Save_Subscription_Tier</name>
+        <label>Save Subscription Tier</label>
+        <locationX>270</locationX>
+        <locationY>1055</locationY>
+        <assignmentItems>
+            <assignToReference>PaidSubscriptionTier</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Read_Opps.Subscription_Tier__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Read_Opps</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Save_Support_Level</name>
+        <label>Save Support Level</label>
+        <locationX>270</locationX>
+        <locationY>755</locationY>
+        <assignmentItems>
+            <assignToReference>CurrentSupportLevel</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Read_Opps.Support_Level__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Is_Valid_Subscription_Tier</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Is_Support_Plan_Valid</name>
+        <label>Is Support Plan Valid</label>
+        <locationX>402</locationX>
+        <locationY>647</locationY>
+        <defaultConnector>
+            <targetReference>Is_Valid_Subscription_Tier</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Valid_Support_Plan_Value</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Read_Opps.Support_Level__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>&quot;&quot;</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Save_Support_Level</targetReference>
+            </connector>
+            <label>Valid Support Plan Value</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_Valid_Subscription_Tier</name>
+        <label>Is Valid Subscription Tier</label>
+        <locationX>402</locationX>
+        <locationY>947</locationY>
+        <defaultConnector>
+            <targetReference>Read_Opps</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Valid_Subscription_Tier</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Read_Opps.Subscription_Tier__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Basic Tier</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Read_Opps.Subscription_Tier__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Enterprise Tier</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Read_Opps.Subscription_Tier__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Advanced Tier</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Read_Opps.Subscription_Tier__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Ultimate Tier</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Save_Subscription_Tier</targetReference>
+            </connector>
+            <label>Valid Subscription Tier</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Support_Level_Need_Update</name>
+        <label>Support Level Need Update</label>
+        <locationX>182</locationX>
+        <locationY>1631</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Support_Level_Changed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Support_Level__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>CurrentSupportLevel</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Save_Current_Support_Level</targetReference>
+            </connector>
+            <label>Support Level Changed</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Update_Subscription_Tier</name>
+        <label>Update Subscription Tier?</label>
+        <locationX>182</locationX>
+        <locationY>1331</locationY>
+        <defaultConnector>
+            <targetReference>Support_Level_Need_Update</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Update_to_Latest_Subscription_Tier</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>PaidSubscriptionTier</leftValueReference>
+                <operator>NotEqualTo</operator>
+            </conditions>
+            <connector>
+                <targetReference>Update_Account_Subscription_Tier</targetReference>
+            </connector>
+            <label>Update to Latest Subscription Tier</label>
+        </rules>
+    </decisions>
+    <description>Add a copy of the subscription tier</description>
+    <environments>Default</environments>
+    <interviewLabel>Update Account Support Level {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Update Account Support Level &amp; Subscription Tier</label>
+    <loops>
+        <name>Read_Opps</name>
+        <label>Read Opps</label>
+        <locationX>182</locationX>
+        <locationY>539</locationY>
+        <collectionReference>Get_All_Won_Opportunities</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Is_Support_Plan_Valid</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_Subscription_Tier</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_All_Won_Opportunities</name>
+        <label>Get All Won Opportunities</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Default_to_Eval</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsWon</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <sortField>CloseDate</sortField>
+        <sortOrder>Asc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Save_Current_Support_Level</name>
+        <label>Save Current Support Level</label>
+        <locationX>50</locationX>
+        <locationY>1739</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Support_Level__c</field>
+            <value>
+                <elementReference>CurrentSupportLevel</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Account_Subscription_Tier</name>
+        <label>Update Account Subscription Tier</label>
+        <locationX>50</locationX>
+        <locationY>1439</locationY>
+        <connector>
+            <targetReference>Support_Level_Need_Update</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Subscription_Tier__c</field>
+            <value>
+                <elementReference>PaidSubscriptionTier</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_All_Won_Opportunities</targetReference>
+        </connector>
+        <object>Account</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>CurrentSupportLevel</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>PaidSubscriptionTier</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>
