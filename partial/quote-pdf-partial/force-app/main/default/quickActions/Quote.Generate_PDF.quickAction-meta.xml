@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
-    <flowDefinition>Generate_PDF</flowDefinition>
-    <label>Generate PDF</label>
+    <height>250</height>
+    <label>Generate PDF2</label>
     <optionsCreateFeedItem>false</optionsCreateFeedItem>
-    <type>Flow</type>
+    <page>QuotePDFTemplate</page>
+    <type>VisualforcePage</type>
+    <width>-100</width>
 </QuickAction>

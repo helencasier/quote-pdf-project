@@ -17,5 +17,24 @@
         <members>*</members>
         <name>CustomMetadata</name>
     </types>
-    <version>58.0</version>
+    <types>
+        <members>Quote.NewPDF</members>
+        <name>WebLink</name>
+    </types>
+  <types>
+        <members>Legal_document__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>Legal_document__c.*</members>
+        <name>CustomField</name>
+    </types>
+
+
+    <types>
+        <members>Quote-Quote Layout</members>
+        <name>Layout</name>
+    </types>
+    
+    <version>64.0</version>
 </Package>

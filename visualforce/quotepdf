@@ -1,0 +1,50 @@
+<style>
+    body {
+        font-family: 'Roboto', Arial, sans-serif;
+        font-size: 11pt;
+        color: #333;
+        line-height: 1.6;
+        margin: 20px;
+    }
+    h1, .section-header {
+        font-size: 14pt;
+        color: #2a4a7b;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #2a4a7b;
+        padding-bottom: 4px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+    th {
+        background-color: #f5f7fa;
+        color: #2a4a7b;
+        font-weight: 600;
+        text-align: left;
+        padding: 8px;
+        border-bottom: 2px solid #dee2e6;
+    }
+    td {
+        padding: 8px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .grand-total {
+        font-size: 12pt;
+        font-weight: bold;
+        text-align: right;
+        padding-top: 10px;
+    }
+    .signature-block {
+        margin-top: 40px;
+    }
+    .signature-line {
+        border-bottom: 1px dotted #999;
+        width: 80%;
+        margin-top: 30px;
+    }
+</style>
