@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CSM_Upgrade__c</fullName>
+    <formula>AND(
+ OR(
+    ISPICKVAL(CSM_Notes__r.Add_On_Type__c,&quot;Renewal&quot;)
+),
+  
+  
+  ISPICKVAL(CSM_Notes__r.Add_On_Type__c ,&quot;EXPANSION&quot;)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CSM Upgrade</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,220 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref1"
+            },
+            "Name": "Resilio Connect 2022",
+            "IsActive": true
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref2"
+            },
+            "Name": "Resilio Connect 2019/2020",
+            "IsActive": true
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref3"
+            },
+            "Name": "v3 Price Book",
+            "IsActive": true
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref4"
+            },
+            "Name": "Publicis Groupe",
+            "IsActive": true
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref5"
+            },
+            "Name": "Reseller Price Book",
+            "IsActive": true
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref6"
+            },
+            "Name": "3-Tier Price Book",
+            "IsActive": true
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref7"
+            },
+            "Name": "Standard Price Book",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref8"
+            },
+            "Name": "Connect Price Book- 1 Year",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref9"
+            },
+            "Name": "Connect Price Book- 2 Year",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref10"
+            },
+            "Name": "Connect Price Book- 3 Year",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref11"
+            },
+            "Name": "Reseller Price Book- 1 Year",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref12"
+            },
+            "Name": "Connect Price Book- 5 year",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref13"
+            },
+            "Name": "2017 Connect Price Book- 1 Year",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref14"
+            },
+            "Name": "2017 Connect Price Book- 2 Year",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref15"
+            },
+            "Name": "2017 Connect Price Book- 3 Year",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref16"
+            },
+            "Name": "2017 Connect Price Book- 5 year",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref17"
+            },
+            "Name": "Support",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref18"
+            },
+            "Name": "H2 2017 Connect 1 Year Price Book",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref19"
+            },
+            "Name": "H2 2017 Connect 2 Year Price Book",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref20"
+            },
+            "Name": "H2 2017 Connect 3 Year Price Book",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref21"
+            },
+            "Name": "H2 2017 Connect 5 Year Price Book",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref22"
+            },
+            "Name": "Self Starter Price Book",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref23"
+            },
+            "Name": "Connect 12 Month - 2018",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref24"
+            },
+            "Name": "Connect 24 Month - 2018",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref25"
+            },
+            "Name": "Connect 36 Month - 2018",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref26"
+            },
+            "Name": "2018 Reseller Price Book- 1 Year",
+            "IsActive": false
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "Pricebook2Ref27"
+            },
+            "Name": "Connect 60 Month - 2018",
+            "IsActive": false
+        }
+    ]
+}

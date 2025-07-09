@@ -1,0 +1,169 @@
+<apex:page renderAs="pdf" standardController="Quote" extensions="QuoteController">
+<html>
+<head>
+    <style>
+        body {
+            font-family: Helvetica;
+            font-size: 10pt;
+            color: #000;
+            line-height: 1.4;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #4a4a4a;
+            color: white;
+            padding: 6px 8px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 9pt;
+        }
+        td {
+            padding: 6px 8px;
+            vertical-align: middle;
+            font-size: 9pt;
+        }
+        .info-table td {
+            padding: 4px 8px;
+            vertical-align: top;
+            border: none;
+        }
+        .info-table .label {
+            font-weight: bold;
+            width: 150px;
+            white-space: nowrap;
+        }
+        .spacer {
+            width: 40px;
+        }
+        .grand-total-row td {
+            font-size: 10pt;
+            border: 1px solid #ccc;
+        }
+        .quote-notes {
+            font-style: italic;
+            margin-top: 16px;
+        }
+        .signature-block {
+            margin-top: 40px;
+        }
+        .signature-table td {
+            padding: 6px 12px;
+            vertical-align: top;
+            border: none;
+        }
+        .section-header {
+            font-weight: bold;
+            font-size: 12pt;
+            padding: 6px 8px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Resilio Info -->
+<table style="width: 100%; background-color: #dce6f1;"><tr><td class="section-header">Resilio, Inc.</td></tr></table>
+<table class="info-table">
+    <tr>
+        <td class="label">Company Address</td>
+        <td>
+            4900 Hopyard Rd Suite 100<br/>
+            Pleasanton, California 94588<br/>
+            United States
+        </td>
+        <td class="spacer"></td>
+        <td class="label">Created Date</td>
+        <td>{!TEXT(DATEVALUE(Quote.CreatedDate))}</td>
+    </tr>
+    <tr>
+        <td class="label">Prepared By</td>
+        <td>{!preparedByDisplay}</td>
+        <td class="spacer"></td>
+        <td class="label">Quote Number</td>
+        <td>{!Quote.QuoteNumber}</td>
+    </tr>
+    <tr>
+        <td class="label">Primary Contact</td>
+        <td>{!primaryContactName}</td>
+        <td class="spacer"></td>
+        <td class="label">Primary Contact Email</td>
+        <td>{!primaryContactEmail}</td>
+    </tr>
+    <tr>
+        <td class="label">Prepared By Email</td>
+        <td>{!currentUserEmail}</td>
+        <td class="spacer"></td>
+        <td class="label">Expiration Date</td>
+        <td>{!TEXT(Quote.ExpirationDate)}</td>
+    </tr>
+</table>
+
+<!-- Quote Line Items -->
+<table style="width: 100%; background-color: #dce6f1;"><tr><td class="section-header">Quote Line Items</td></tr></table>
+<apex:outputPanel rendered="{!hasDiscounts}">
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Product Code</th>
+            <th>Line Item Description</th>
+            <th style="text-align: right;">Quantity</th>
+            <th style="text-align: right;">Sales Price</th>
+            <th style="text-align: right;">Subtotal</th>
+            <th style="text-align: right;">Discount (%)</th>
+            <th style="text-align: right;">Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <apex:repeat value="{!wrappedLineItems}" var="wrapper">
+            <tr>
+                <td>{!wrapper.qli.Product2.Name}</td>
+                <td>{!wrapper.qli.Product2.ProductCode}</td>
+                <td>{!IF(ISBLANK(wrapper.qli.Description), 'Included', wrapper.qli.Description)}</td>
+                <td style="text-align: right;">{!TEXT(wrapper.qli.Quantity)}</td>
+                <td style="text-align: right;">${!TEXT(wrapper.qli.UnitPrice)}</td>
+                <td style="text-align: right;">${!TEXT(wrapper.qli.UnitPrice * wrapper.qli.Quantity)}</td>
+                <td style="text-align: right;">{!IF(wrapper.discountPercent > 0, TEXT(ROUND(wrapper.discountPercent, 0)) & "%", "")}</td>
+                <td style="text-align: right;">${!TEXT(wrapper.qli.TotalPrice)}</td>
+            </tr>
+        </apex:repeat>
+    </tbody>
+</table>
+</apex:outputPanel>
+
+<!-- Signature Section -->
+<table style="width: 100%; margin-top: 20px;">
+    <tr>
+        <th colspan="2" style="background-color: #e0e6ef; font-weight: bold; padding: 6px;">Signatures</th>
+    </tr>
+    <tr>
+        <td style="width: 45%; padding: 10px;">
+            <strong>Customer Signature:</strong>
+        </td>
+        <td style="width: 45%; padding: 10px;">
+            <strong>Resilio, Inc. Signature:</strong>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">
+            Name (Print):<br/>
+            Title:<br/>
+            Date:
+        </td>
+        <td style="padding: 10px;">
+            Name (Print):<br/>
+            Title:<br/>
+            Date:
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
+</apex:page>

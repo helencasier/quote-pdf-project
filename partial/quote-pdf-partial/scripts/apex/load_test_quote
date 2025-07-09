@@ -1,0 +1,71 @@
+// 🌱 Create Account
+Account acc = new Account(
+    Name = 'Test Account - PDF',
+    BillingStreet = '123 Test St',
+    BillingCity = 'San Jose',
+    BillingState = 'CA',
+    BillingPostalCode = '95118',
+    BillingCountry = 'USA'
+);
+insert acc;
+
+// 🌱 Create Contact
+Contact con = new Contact(
+    FirstName = 'Jane',
+    LastName = 'Doe',
+    Email = 'jane.doe@example.com',
+    Phone = '555-123-4567',
+    AccountId = acc.Id
+);
+insert con;
+
+// 🌱 Create Opportunity
+Opportunity opp = new Opportunity(
+    Name = 'Test Opportunity - PDF',
+    StageName = 'Closed Won',
+    CloseDate = Date.today(),
+    AccountId = acc.Id
+);
+insert opp;
+
+// 🌱 Create Quote
+Quote q = new Quote(
+    Name = 'Test Quote - PDF',
+    OpportunityId = opp.Id, // ✅ opp.Id now exists
+    ContactId = con.Id,
+    ExpirationDate = Date.today().addDays(30),
+    BillingName = acc.Name,
+    BillingStreet = acc.BillingStreet,
+    BillingCity = acc.BillingCity,
+    BillingState = acc.BillingState,
+    BillingPostalCode = acc.BillingPostalCode,
+    BillingCountry = acc.BillingCountry
+);
+insert q;
+
+// 🌱 Get Standard Pricebook
+Pricebook2 pb = [SELECT Id FROM Pricebook2 WHERE IsStandard = true LIMIT 1];
+
+// 🌱 Create Product
+Product2 prod = new Product2(Name='Test Product A', IsActive=true);
+insert prod;
+
+// 🌱 Create PricebookEntry
+PricebookEntry pbe = new PricebookEntry(
+    Pricebook2Id = pb.Id,
+    Product2Id = prod.Id,
+    UnitPrice = 99.99,
+    IsActive = true
+);
+insert pbe;
+
+// 🌱 Add Quote Line Item
+QuoteLineItem qli = new QuoteLineItem(
+    QuoteId = q.Id,
+    PricebookEntryId = pbe.Id,
+    Quantity = 2,
+    UnitPrice = 99.99
+);
+insert qli;
+
+System.debug('🌟 Test Quote Created: ' + q.Id);
