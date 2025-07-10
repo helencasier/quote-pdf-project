@@ -3,163 +3,147 @@
 <head>
     <style>
         body {
-            font-family: Helvetica;
+            font-family: Helvetica, Arial, sans-serif;
             font-size: 10pt;
-            color: #000;
-            line-height: 1.4;
+            color: #333333;
+            margin: 30px;
+        }
+        h1 {
+            font-size: 16pt;
+            color: #1b4f72;
+            margin-bottom: 10px;
+        }
+        .grand-total {
+            background-color: #dce6f1;
+            text-align: right;
+            font-weight: bold;
+            font-size: 11pt;
+            padding: 10px;
+            border-top: 2px solid #1b4f72;
+        }
+        .section-header {
+            background-color: #dce6f1;
+            color: #000000;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 11pt;
+        }
+        .signature-line {
+            border-bottom: 1px dotted #999999;
+            width: 250px;
+            margin-top: 40px;
+        }
+        .info-table td {
+            border: none;
+            padding: 4px 8px;
+        }
+        .info-table .label {
+            font-weight: bold;
+            color: #1b4f72;
+            width: 140px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
         }
         th, td {
             border: 1px solid #ccc;
+            padding: 6px;
         }
         th {
-            background-color: #4a4a4a;
-            color: white;
-            padding: 6px 8px;
+            background-color: #1b4f72;
+            color: #fff;
             text-align: left;
-            font-weight: bold;
-            font-size: 9pt;
-        }
-        td {
-            padding: 6px 8px;
-            vertical-align: middle;
-            font-size: 9pt;
-        }
-        .info-table td {
-            padding: 4px 8px;
-            vertical-align: top;
-            border: none;
-        }
-        .info-table .label {
-            font-weight: bold;
-            width: 150px;
-            white-space: nowrap;
-        }
-        .spacer {
-            width: 40px;
-        }
-        .grand-total-row td {
-            font-size: 10pt;
-            border: 1px solid #ccc;
-        }
-        .quote-notes {
-            font-style: italic;
-            margin-top: 16px;
-        }
-        .signature-block {
-            margin-top: 40px;
-        }
-        .signature-table td {
-            padding: 6px 12px;
-            vertical-align: top;
-            border: none;
-        }
-        .section-header {
-            font-weight: bold;
-            font-size: 12pt;
-            padding: 6px 8px;
         }
     </style>
 </head>
 <body>
 
-<!-- Resilio Info -->
-<table style="width: 100%; background-color: #dce6f1;"><tr><td class="section-header">Resilio, Inc.</td></tr></table>
-<table class="info-table">
+<h1>Resilio, Inc.</h1>
+<p>
+    4900 Hopyard Rd Suite 100<br/>
+    Pleasanton, CA 94588, USA
+</p>
+
+<table width="100%" style="margin-top: 20px;">
     <tr>
-        <td class="label">Company Address</td>
-        <td>
-            4900 Hopyard Rd Suite 100<br/>
-            Pleasanton, California 94588<br/>
-            United States
-        </td>
-        <td class="spacer"></td>
-        <td class="label">Created Date</td>
-        <td>{!TEXT(DATEVALUE(Quote.CreatedDate))}</td>
-    </tr>
-    <tr>
-        <td class="label">Prepared By</td>
-        <td>{!preparedByDisplay}</td>
-        <td class="spacer"></td>
-        <td class="label">Quote Number</td>
-        <td>{!Quote.QuoteNumber}</td>
-    </tr>
-    <tr>
-        <td class="label">Primary Contact</td>
-        <td>{!primaryContactName}</td>
-        <td class="spacer"></td>
-        <td class="label">Primary Contact Email</td>
-        <td>{!primaryContactEmail}</td>
-    </tr>
-    <tr>
-        <td class="label">Prepared By Email</td>
-        <td>{!currentUserEmail}</td>
-        <td class="spacer"></td>
-        <td class="label">Expiration Date</td>
-        <td>{!TEXT(Quote.ExpirationDate)}</td>
+        <td class="section-header">Customer Information</td>
     </tr>
 </table>
 
-<!-- Quote Line Items -->
-<table style="width: 100%; background-color: #dce6f1;"><tr><td class="section-header">Quote Line Items</td></tr></table>
-<apex:outputPanel rendered="{!hasDiscounts}">
-<table>
+<table class="info-table" width="100%">
+    <tr>
+        <td class="label">Prepared By:</td>
+        <td>{!preparedByDisplay}</td>
+        <td class="label">Quote Number:</td>
+        <td>{!Quote.QuoteNumber}</td>
+    </tr>
+    <tr>
+        <td class="label">Primary Contact:</td>
+        <td>{!primaryContactName}</td>
+        <td class="label">Email:</td>
+        <td>{!primaryContactEmail}</td>
+    </tr>
+    <tr>
+        <td class="label">Expiration Date:</td>
+        <td>{!TEXT(Quote.ExpirationDate)}</td>
+        <td class="label">Created Date:</td>
+        <td>{!TEXT(Quote.CreatedDate)}</td>
+    </tr>
+</table>
+
+<table width="100%" style="margin-top: 20px;">
+    <tr>
+        <td class="section-header">Quote Line Items</td>
+    </tr>
+</table>
+
+<table width="100%">
     <thead>
         <tr>
             <th>Product</th>
-            <th>Product Code</th>
-            <th>Line Item Description</th>
+            <th>Description</th>
             <th style="text-align: right;">Quantity</th>
-            <th style="text-align: right;">Sales Price</th>
-            <th style="text-align: right;">Subtotal</th>
-            <th style="text-align: right;">Discount (%)</th>
-            <th style="text-align: right;">Total Price</th>
+            <th style="text-align: right;">Unit Price</th>
+            <th style="text-align: right;">Total</th>
         </tr>
     </thead>
     <tbody>
         <apex:repeat value="{!wrappedLineItems}" var="wrapper">
-            <tr>
+            <tr bgcolor="{!wrapper.rowColor}">
                 <td>{!wrapper.qli.Product2.Name}</td>
-                <td>{!wrapper.qli.Product2.ProductCode}</td>
                 <td>{!IF(ISBLANK(wrapper.qli.Description), 'Included', wrapper.qli.Description)}</td>
                 <td style="text-align: right;">{!TEXT(wrapper.qli.Quantity)}</td>
                 <td style="text-align: right;">${!TEXT(wrapper.qli.UnitPrice)}</td>
-                <td style="text-align: right;">${!TEXT(wrapper.qli.UnitPrice * wrapper.qli.Quantity)}</td>
-                <td style="text-align: right;">{!IF(wrapper.discountPercent > 0, TEXT(ROUND(wrapper.discountPercent, 0)) & "%", "")}</td>
                 <td style="text-align: right;">${!TEXT(wrapper.qli.TotalPrice)}</td>
             </tr>
         </apex:repeat>
     </tbody>
 </table>
-</apex:outputPanel>
 
-<!-- Signature Section -->
-<table style="width: 100%; margin-top: 20px;">
+<p class="grand-total">Grand Total: ${!TEXT(Quote.GrandTotal)}</p>
+
+<table width="100%" style="margin-top: 20px;">
     <tr>
-        <th colspan="2" style="background-color: #e0e6ef; font-weight: bold; padding: 6px;">Signatures</th>
+        <td class="section-header">Signatures</td>
     </tr>
+</table>
+
+<table width="100%">
     <tr>
-        <td style="width: 45%; padding: 10px;">
+        <td style="padding: 10px;">
             <strong>Customer Signature:</strong>
+            <div class="signature-line"></div>
+            Name (Print): ____________________________________<br/>
+            Title: ____________________________________________<br/>
+            Date: ____________________________________________<br/>
         </td>
-        <td style="width: 45%; padding: 10px;">
+        <td style="padding: 10px;">
             <strong>Resilio, Inc. Signature:</strong>
-        </td>
-    </tr>
-    <tr>
-        <td style="padding: 10px;">
-            Name (Print):<br/>
-            Title:<br/>
-            Date:
-        </td>
-        <td style="padding: 10px;">
-            Name (Print):<br/>
-            Title:<br/>
-            Date:
+            <div class="signature-line"></div>
+            Name (Print): ____________________________________<br/>
+            Title: ____________________________________________<br/>
+            Date: ____________________________________________<br/>
         </td>
     </tr>
 </table>
