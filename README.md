@@ -1,4 +1,3 @@
-# 2025-07-31
 # quote-pdf-project
 
 This repository contains the source code for the **Salesforce Quote PDF generation** project.
