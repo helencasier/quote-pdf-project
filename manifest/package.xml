@@ -7,15 +7,27 @@
     </types>
     <types>
         <members>QuotePDFTemplate</members>
-        <name>VisualforcePage</name>
+        <name>ApexPage</name>
     </types>
-    <types>
-        <members>*</members>
-        <name>StaticResource</name>
-    </types>
+   <!-- Remove this block entirely -->
+<!--
+<types>
+    <members>*</members>
+    <name>StaticResource</name>
+</types>
+-->
     <types>
         <members>*</members>
         <name>CustomMetadata</name>
     </types>
+    <types>
+        <members>Legal_document__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>Legal_document__c.*</members>
+        <name>CustomField</name>
+    </types>
+
     <version>58.0</version>
 </Package>
