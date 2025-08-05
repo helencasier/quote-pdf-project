@@ -8,5 +8,5 @@
   "name": "quote-pdf-partial",
   "namespace": "",
   "sfdcLoginUrl": "https://test.salesforce.com",
-  "sourceApiVersion": "62.0"
+  "sourceApiVersion": "60.0"
 }

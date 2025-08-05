@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
-    <label>Create PDF New</label>
-    <description>Create a new PDF from Quote</description>
+    <actionType>Visualforce</actionType>
+    <label>Generate PDF</label>
     <targetObject>Quote</targetObject>
     <visualforcePage>QuotePDFTemplate</visualforcePage>
 </QuickAction>
